@@ -52,7 +52,6 @@ const EditMusic = () => {
     const handleClickUpdateSong = async () => {
 
         try {
-            // Bắt đầu tải lên ảnh
             const image = await handleUploadImage();
             dispatch(changeImage({ key: 'image', value: image }));
             setisImageUploaded(true);
