@@ -1,6 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { musicService } from '../service/musicService';
 
+export const uploadImageMusic = createAsyncThunk(
+  'music/uploadImageMusic',
+
+)
 
 export const searchMusic = createAsyncThunk(
   'music/searchMusic',
@@ -53,7 +57,7 @@ export const musicSlice = createSlice({
     data: [],
     song: {
       title: '',
-      image: '',
+      image: null,
       singerFullName: '',
       youtubeId: '',
       author: '',
@@ -66,6 +70,10 @@ export const musicSlice = createSlice({
       const key = Object.keys(obj);
       const value = obj[key];
 
+      state.song[key] = value;
+    },
+    changeImage: (state, { payload }) => {
+      const { key, value } = payload;
       state.song[key] = value;
     },
     resetFormSongCreate: (state) => {
@@ -132,9 +140,7 @@ export const musicSlice = createSlice({
 export const {
   changeSong,
   changeQuantity,
-  increment,
-  decrement,
-  incrementByAmount,
+  changeImage,
   loadSong,
   changeSearch,
   resetFormSongCreate,

@@ -5,9 +5,13 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { changeSong, fetchSongById, updateSong } from '../redux/musicSlice';
 
 const EditMusic = () => {
+    const cloudName = 'dekggnmc5';
+    const unsignedUploadPrefix = 'upload';
+    const API_URL = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    const [image, setImage] = useState('')
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const [isImageUploaded, setisImageUploaded] = useState(false)
     const { songId } = useParams();
     console.log(songId);
 
@@ -21,9 +25,32 @@ const EditMusic = () => {
         dispatch(action);
     };
 
+    const handleChangeImage = (e) => {
+        setImage(e.target.files[0])
+    }
+
+    const handleUploadImage = async () => {
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('upload_preset', unsignedUploadPrefix);
+
+        return await axios.put(API_URL, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }).then((response) => {
+            setImage(response.data.url);
+            return response.data.url
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
+
     const handleClickUpdateSong = () => {
+
         const obj = {
             ...song,
+            image: image,
             singer: {
                 fullName: song.singerFullName,
             },

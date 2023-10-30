@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from "sweetalert2";
 import {
-    fetchAllMusic,
     deleteSong,
     searchMusic,
     changeSearch,
@@ -16,14 +15,8 @@ const Index = () => {
     const musicData = useSelector((state) => state.music.data);
     const loading = useSelector((state) => state.music.loading)
     const search = useSelector((state) => state.music.search)
+
     const handleDeleteMusic = (id) => {
-        // Swal.fire({
-        //     position: 'center',
-        //     icon: 'success',
-        //     title: 'xóa Thành Công !',
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // })
         Swal.fire({
             title: 'Do you want to delete the song?',
             showCancelButton: true,
@@ -82,14 +75,12 @@ const Index = () => {
                         {
                             musicData.map((item) => {
                                 return (
-                                    <div key={item.id} className="col-3"
-
-                                    >
+                                    <div key={item.id} className="col-3">
                                         <div className='card mb-4'>
                                             <div >
                                                 <img className='avatar-md m-auto' src={item.image} style={
                                                     {
-                                                        width: '100%',
+                                                        width: '100%'
                                                     }
                                                 } alt="" />
                                             </div>

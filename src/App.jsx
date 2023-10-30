@@ -16,7 +16,7 @@ function App() {
       <Navbar />
       <Provider store={store}>
         <Routes>
-          <Route path="" element={<Index />}></Route>
+          <Route path="/" element={<Index />}></Route>
           <Route path="music/add" element={<AddMusic />}></Route>
           <Route path="music/edit/:songId" element={<EditMusic />}></Route>
           <Route path="music/watch" element={<PlayMusic />}></Route>
