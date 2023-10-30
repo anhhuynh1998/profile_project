@@ -4,7 +4,7 @@ import { SONG_API } from "../constants/global"
 
 export const musicService = {
     getAll: (search) => {
-        return axios.get(`http://localhost:3301/songs?_sort=id&_order=desc${search ? `&q=${search}` : ''}`);
+        return axios.get(`https://json-server-new.vercel.app/songs?_sort=id&_order=desc${search ? `&q=${search}` : ''}`);
     },
     getSongById: (id) => {
         return axios.get(SONG_API + '/' + id)
